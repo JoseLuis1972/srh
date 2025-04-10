@@ -9,6 +9,35 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('Tablemetasdinamicas.list') }}">
+                <i class="fa fa-external-link menu-icon"></i>
+                <span class="menu-title">Metas Individuales</span>
+            </a>
+        </li>
+
+         <li class="nav-item">
+            <a class="nav-link" href="{{ route('communication.list') }}">
+                <i class="fa fa-line-chart menu-icon"></i>
+                <span class="menu-title">Metas Institucionales</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('request.list') }}">
+                <i class="fa fa-edit menu-icon"></i>
+                <span class="menu-title">Eval. Correctiva/Mejora</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <i class="fa fa-mortar-board menu-icon"></i>
+                <span class="menu-title">Evaluaciones</span>
+            </a>
+        </li>
+
+
         <!-- Item Administración -->
         @if(isset($adminMatch) && $adminMatch)
             <li class="nav-item {{ request()->routeIs('user.list') ? 'active' : '' }}">
@@ -92,6 +121,35 @@
                 </div>
             </li>
         @endif
+         <!-- Item Sievade -->
+        @if(isset($coursesMatch) && $coursesMatch)
+            <li class="nav-item {{ request()->routeIs('coursesauditoria.list') || request()->routeIs('courses.list') || request()->routeIs('coursescategoria.list') || request()->routeIs('coursescoordinacion.list') || request()->routeIs('coursesestatuto.list') || request()->routeIs('coursesmodalidad.list') || request()->routeIs('coursesnombreacc.list') || request()->routeIs('coursesorganizacion.list') || request()->routeIs('coursesprograma.list') || request()->routeIs('coursestipoac.list') || request()->routeIs('coursestipocur.list') || request()->routeIs('tableinstructor.list') || request()->routeIs('tablecourses.list') ? 'active' : '' }}">
+                <a class="nav-link" data-toggle="collapse" href="#ui-cursos-sievade" aria-expanded="false" aria-controls="ui-cursos-sievade">
+                    <i class="fa fa-desktop menu-icon"></i>
+                    <span class="menu-title">Catalogos Sievade</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-cursos-sievade">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeinstrumento.list') }}">Gestion del rendimiento</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeverbo.list') }}">Verbo en infinitivo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadetipo.list') }}">Tipo de accion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeum.list') }}">Unidad de medicion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadecriterio.list') }}"> Criterio y principios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievademn.list') }}">Marco Normativo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadevalor.list') }}">Valor de Indicador</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeindicador.list') }}">Indicador</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievademeta.list') }}">Meta individual</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeunidad.list') }}">Tipo de Unidad</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeparametro.list') }}">parametro alcanzado</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeaccion.list') }}">Accion correctiva </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadeasociado.list') }}">Comportamiento asociado</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('Sievadealineacion.list') }}">Aliniacion al PND</a></li>
+                    </ul>
+                </div>
+            </li>
+        @endif
+
 
         <!-- Item Acerca de -->
         <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
