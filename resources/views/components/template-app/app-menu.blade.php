@@ -3,7 +3,7 @@
  <ul class="nav">
 
         <!-- Item de inicio -->
-        <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Inicio</span>
@@ -67,7 +67,7 @@
                     <span class="menu-title">Reportes</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="ui-basic_corres">
+                <div class="collapse" id="ui-basic-corres">
                     <ul class="nav flex-column sub-menu">
                         <!-- <li class="nav-item"><a class="nav-link" href="#">Administración</a></li>     -->
                         <li class="nav-item"><a class="nav-link" href="{{ route('letter.list') }}">Resumen de Calif.</a></li>
@@ -142,18 +142,15 @@
                     </li>
         @endif
 
-
         <!-- Item Cursos -->
-        @if($adminMatch)
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic-courses" aria-expanded="false"
-                    aria-controls="ui-basic-courses">
+        @if(isset($coursesMatch) && $coursesMatch)
+            <li class="nav-item {{ request()->routeIs('coursesauditoria.list') || request()->routeIs('courses.list') || request()->routeIs('coursescategoria.list') || request()->routeIs('coursescoordinacion.list') || request()->routeIs('coursesestatuto.list') || request()->routeIs('coursesmodalidad.list') || request()->routeIs('coursesnombreacc.list') || request()->routeIs('coursesorganizacion.list') || request()->routeIs('coursesprograma.list') || request()->routeIs('coursestipoac.list') || request()->routeIs('coursestipocur.list') || request()->routeIs('tableinstructor.list') || request()->routeIs('tablecourses.list') ? 'active' : '' }}">
+                <a class="nav-link" data-toggle="collapse" href="#ui-cursos" aria-expanded="false" aria-controls="ui-cursos">
                     <i class="fa fa-desktop menu-icon"></i>
-                    <!-- Icono cambiado a computadora -->
                     <span class="menu-title">Cursos</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="ui-basic-courses">
+                <div class="collapse" id="ui-cursos">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"><a class="nav-link" href="{{ route('coursesauditoria.list') }}">Auditoria</a>                        </li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('courses.list') }}">Beneficio</a></li>
@@ -174,7 +171,7 @@
         @endif
 
         <!-- Item Acerca de -->
-        <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('about') }}">
                 <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Acerca de</span>

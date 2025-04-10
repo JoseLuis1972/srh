@@ -14,6 +14,8 @@
                     </div>
                 </div>
             </div>
+            <!-- View->modal -->
+            @include('courses.tablecourses.modal')
 
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card custom-card">
@@ -22,7 +24,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h4 class="card-title">Cursos</h4>
-                                @if($letterAdminMatch)
+                                @if($coursesMatch)
                                     <p class="card-description">
                                         ¿Deseas agregar un registro? 
                                         <a href="{{ route('tablecourses.create') }}" class="text-danger" style="margin-left: 10px;">
@@ -83,5 +85,6 @@
 
     <!-- CODE SCRIPT-->
     <script src="{{ asset('assets/js/app/courses/tablecourses/table.js') }}"></script>
+    <script src="{{ asset('assets/js/app/courses/tablecourses/modal.js') }}"></script>
 
 </x-template-app.app-layout>
