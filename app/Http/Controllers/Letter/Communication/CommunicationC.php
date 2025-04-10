@@ -136,7 +136,7 @@ class CommunicationC extends Controller
         }
     }
 
-    // LA función guarda los datos 
+    // LA función guarda los datos
     public function save(Request $request)
     {
         // Class
@@ -276,7 +276,7 @@ class CommunicationC extends Controller
         ]);
     }
 
-    // LA función sube el archivo a alfresco 
+    // LA función sube el archivo a alfresco
     public function addOficio(Request $request)
     {
 

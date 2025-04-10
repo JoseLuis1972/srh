@@ -100,6 +100,7 @@ class FileC extends Controller
         return view('letter/file/form', compact('selectEnlaceEdit', 'selectEnlace', 'selectUserEdit', 'selectUser', 'selectAreaEditAux', 'selectAreaAux', 'noLetter', 'item'));
     }
 
+
     public function edit(string $id)
     {
         $object = new FileM();
@@ -123,6 +124,7 @@ class FileC extends Controller
 
         return view('letter/file/form', compact('selectEnlaceEdit', 'selectEnlace', 'selectUserEdit', 'selectUser', 'selectAreaEditAux', 'selectAreaAux', 'noLetter', 'item'));
     }
+
 
     public function save(Request $request)
     {
@@ -188,7 +190,7 @@ class FileC extends Controller
 
             return $messagesC->messageSuccessRedirect('file.list', 'Elemento agregado con éxito.');
 
-        } else { //modificar elemento 
+        } else { //modificar elemento
 
             $data = [
                 'fecha_inicio' => $request->fecha_inicio,

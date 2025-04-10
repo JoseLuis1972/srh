@@ -5,6 +5,7 @@ namespace App\Models\Letter\Letter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 class LetterM extends Model
+
 {
     protected $table = 'correspondencia.tbl_correspondencia';
     public $timestamps = false;
@@ -145,7 +146,7 @@ class LetterM extends Model
                 'correspondencia.tbl_correspondencia.asunto AS asunto',
                 'correspondencia.tbl_correspondencia.folio_gestion AS folio_gestion',
                 'correspondencia.tbl_correspondencia.observaciones AS observaciones',
-                DB::raw("COALESCE(correspondencia.cat_remitente.nombre, '') || ' ' || 
+                DB::raw("COALESCE(correspondencia.cat_remitente.nombre, '') || ' ' ||
                             COALESCE(correspondencia.cat_remitente.primer_apellido, '') || ' ' ||
                             COALESCE(correspondencia.cat_remitente.segundo_apellido, '') || ' ' ||
                             ' - ' || COALESCE(correspondencia.cat_remitente.rfc, '') AS remitente"),
@@ -303,7 +304,7 @@ class LetterM extends Model
             ->selectRaw("MAX(CAST((REGEXP_MATCH(num_turno_sistema, '/([0-9]{4,5})/'))[1] AS INTEGER)) AS max_num_turno")
             ->whereRaw("num_turno_sistema ~ '/[0-9]{4,5}/'")
             ->value('max_num_turno'); // Obtener solo el valor de la columna max_num_turno
-    
+
         return $maxNumTurno;
     }
 }

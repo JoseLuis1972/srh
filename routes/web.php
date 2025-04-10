@@ -1,6 +1,15 @@
 <?php
 
 use App\Http\Controllers\Email\EmailC;
+use App\Http\Controllers\Administration\LoginC;
+use App\Http\Controllers\Administration\RecoverC;
+use App\Http\Controllers\Administration\RegisterC;
+use App\Http\Controllers\Administration\UserC;
+use App\Http\Controllers\Home\AboutC;
+use App\Http\Controllers\Home\DashboardC;
+use App\Http\Controllers\Cloud\AlfrescoC;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Letter\Certification\CertificationC;
 use App\Http\Controllers\Letter\Collection\CollectionAreaInternoC;
 use App\Http\Controllers\Letter\Collection\CollectionIteradorInternoC;
@@ -10,7 +19,6 @@ use App\Http\Controllers\Letter\File\CloudFileC;
 use App\Http\Controllers\Letter\Informative\InformativeC;
 use App\Http\Controllers\Letter\Request\RequestC;
 use App\Http\Controllers\Letter\Round\CloudRoundC;
-use App\Http\Controllers\Cloud\AlfrescoC;
 use App\Http\Controllers\Letter\Collection\CollectionYearC;
 use App\Http\Controllers\Letter\File\FileC;
 use App\Http\Controllers\Letter\Inside\CloudInsideC;
@@ -21,13 +29,12 @@ use App\Http\Controllers\Letter\Office\OfficeC;
 use App\Http\Controllers\Letter\Collection\CollectionClaveC;
 use App\Http\Controllers\Letter\Collection\CollectionTramiteC;
 use App\Http\Controllers\Letter\Collection\CollectionUnidadC;
-use App\Http\Controllers\Administration\LoginC;
-use App\Http\Controllers\Administration\RecoverC;
-use App\Http\Controllers\Administration\RegisterC;
-use App\Http\Controllers\Administration\UserC;
-use App\Http\Controllers\Home\AboutC;
-use App\Http\Controllers\Home\DashboardC;
+use App\Http\Controllers\Letter\Letter\LetterC;
+use App\Http\Controllers\Letter\Report\ReporteCorrespondenciaC;
+use App\Http\Controllers\Letter\Report\ReporteTemplateC;
+use App\Http\Controllers\Letter\Round\RoundC;
 use App\Http\Controllers\Letter\Collection\CollectionAreaC;
+
 use App\Http\Controllers\Courses\Courses\CoursesC;
 use App\Http\Controllers\Courses\Coursesauditoria\Courses11C;
 use App\Http\Controllers\Courses\Coursescategoria\Courses2C;
@@ -41,14 +48,24 @@ use App\Http\Controllers\Courses\Coursestipoac\Courses9C;
 use App\Http\Controllers\Courses\Coursestipocur\Courses10C;
 use App\Http\Controllers\Courses\Tableinstructor\InstructorsC;
 use App\Http\Controllers\Courses\Tablecourses\TblCoursesC;
-use App\Http\Controllers\Letter\Letter\LetterC;
-use App\Http\Controllers\Letter\Report\ReporteCorrespondenciaC;
-use App\Http\Controllers\Letter\Report\ReporteTemplateC;
-use App\Http\Controllers\Letter\Round\RoundC;
+
+use App\Http\Controllers\Sievade\Tablemetasdinamicas\TablemetasdinamicasC;
+use App\Http\Controllers\Sievade\Sievadeinstrumento\Sievade1C;
+use App\Http\Controllers\Sievade\Sievadeverbo\Sievade2C;
+use App\Http\Controllers\Sievade\Sievadetipo\Sievade3C;
+use App\Http\Controllers\Sievade\Sievadeum\Sievade4C;
+use App\Http\Controllers\Sievade\Sievadecriterio\Sievade5C;
+use App\Http\Controllers\Sievade\Sievademn\Sievade6C;
+use App\Http\Controllers\Sievade\Sievadevalor\Sievade7C;
+use App\Http\Controllers\Sievade\Sievadeindicador\Sievade8C;
+use App\Http\Controllers\Sievade\Sievademeta\Sievade9C;
+use App\Http\Controllers\Sievade\Sievadeunidad\Sievade10C;
+use App\Http\Controllers\Sievade\Sievadeparametro\Sievade11C;
+use App\Http\Controllers\Sievade\Sievadeaccion\Sievade12C;
+use App\Http\Controllers\Sievade\Sievadeasociado\Sievade13C;
+use App\Http\Controllers\Sievade\Sievadealineacion\Sievade14C;
 
 
-
-use Illuminate\Support\Facades\Route;
 
 Route::get('/login', LoginC::class)->name('login'); ///ROUTE_LOGIN
 Route::get('/register', RegisterC::class)->name('register'); ///ROUTE_REGISTER
@@ -68,6 +85,145 @@ Route::post('/user/save', [UserC::class, 'save'])->name('user.save')->middleware
 Route::get('/user/edit/{id}', [UserC::class, 'edit'])->name('user.edit')->middleware('auth');
 Route::post('/user/validatePassword', [UserC::class, 'validatePassword'])->name('user.validatePassword')->middleware('auth');
 Route::post('/user/changePassword', [UserC::class, 'changePassword'])->name('user.changePassword')->middleware('auth');
+
+
+//    SISTEMA DE EVALUACION  -   MODULO  : Metas Individuales        *****    JHR    10-03-25  *****
+Route::get('/Tablemetasdinamicas/list', [TablemetasdinamicasC::class, 'list'])->name('Tablemetasdinamicas.list')->middleware('auth');
+Route::get('/Tablemetasdinamicas/create', [TablemetasdinamicasC::class, 'create'])->name('Tablemetasdinamicas.create')->middleware('auth');
+Route::post('/Tablemetasdinamicas/table', [TablemetasdinamicasC::class, 'table'])->name('Tablemetasdinamicas.table')->middleware('auth');
+Route::get('/Tablemetasdinamicas/edit/{id}', [TablemetasdinamicasC::class, 'edit'])->name('Tablemetasdinamicas.edit')->middleware('auth');
+Route::post('/Tablemetasdinamicas/save', [TablemetasdinamicasC::class, 'save'])->name('Tablemetasdinamicas.save')->middleware('auth');
+Route::post('/Tablemetasdinamicas/table', [TablemetasdinamicasC::class, 'searchTable']);
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Instrumento de gestion del rendimiento de origen       *****    JHR    10-03-25 *****
+Route::get('/Sievadeinstrumento/list', [Sievade1C::class,  'list'])->name('Sievadeinstrumento.list')->middleware('auth');
+Route::get('/Sievadeinstrumento/create', [Sievade1C::class, 'create'])->name('Sievadeinstrumento.create')->middleware('auth');
+Route::post('/Sievadeinstrumento/save', [Sievade1C::class, 'save'])->name('Sievadeinstrumento.save')->middleware('auth');
+Route::post('/Sievadeinstrumento/table', [Sievade1C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeinstrumento/edit/{id}', [Sievade1C::class, 'edit'])->name('Sievadeinstrumento.edit')->middleware('auth');
+Route::delete('/Sievadeinstrumento/delete/{id}', [Sievade1C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Verbo en infinitivo       *****    JHR    10-03-25 *****
+Route::get('/Sievadeverbo/list', [Sievade2C::class,  'list'])->name('Sievadeverbo.list')->middleware('auth');
+Route::get('/Sievadeverbo/create', [Sievade2C::class, 'create'])->name('Sievadeverbo.create')->middleware('auth');
+Route::post('/Sievadeverbo/save', [Sievade2C::class, 'save'])->name('Sievadeverbo.save')->middleware('auth');
+Route::post('/Sievadeverbo/table', [Sievade2C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeverbo/edit/{id}', [Sievade2C::class, 'edit'])->name('Sievadeverbo.edit')->middleware('auth');
+Route::delete('/Sievadeverbo/delete/{id}', [Sievade2C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Tipo de accion        *****    JHR    10-03-25 *****
+Route::get('/Sievadetipo/list', [Sievade3C::class,  'list'])->name('Sievadetipo.list')->middleware('auth');
+Route::get('/Sievadetipo/create', [Sievade3C::class, 'create'])->name('Sievadetipo.create')->middleware('auth');
+Route::post('/Sievadetipo/save', [Sievade3C::class, 'save'])->name('Sievadetipo.save')->middleware('auth');
+Route::post('/Sievadetipo/table', [Sievade3C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadetipo/edit/{id}', [Sievade3C::class, 'edit'])->name('Sievadetipo.edit')->middleware('auth');
+Route::delete('/Sievadetipo/delete/{id}', [Sievade3C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo  Unidad de medicion       *****    JHR    10-03-25 *****
+Route::get('/Sievadeum/list', [Sievade4C::class,  'list'])->name('Sievadeum.list')->middleware('auth');
+Route::get('/Sievadeum/create', [Sievade4C::class, 'create'])->name('Sievadeum.create')->middleware('auth');
+Route::post('/Sievadeum/save', [Sievade4C::class, 'save'])->name('Sievadeum.save')->middleware('auth');
+Route::post('/Sievadeum/table', [Sievade4C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeum/edit/{id}', [Sievade4C::class, 'edit'])->name('Sievadeum.edit')->middleware('auth');
+Route::delete('/Sievadeum/delete/{id}', [Sievade4C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Criterio y principios       *****    JHR    10-03-25 *****
+Route::get('/Sievadecriterio/list', [Sievade5C::class,  'list'])->name('Sievadecriterio.list')->middleware('auth');
+Route::get('/Sievadecriterio/create', [Sievade5C::class, 'create'])->name('Sievadecriterio.create')->middleware('auth');
+Route::post('/Sievadecriterio/save', [Sievade5C::class, 'save'])->name('Sievadecriterio.save')->middleware('auth');
+Route::post('/Sievadecriterio/table', [Sievade5C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadecriterio/edit/{id}', [Sievade5C::class, 'edit'])->name('Sievadecriterio.edit')->middleware('auth');
+Route::delete('/Sievadecriterio/delete/{id}', [Sievade5C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Actuacion dentro del marco Normativo     *****    JHR    10-03-25 *****
+Route::get('/Sievademn/list', [Sievade6C::class,  'list'])->name('Sievademn.list')->middleware('auth');
+Route::get('/Sievademn/create', [Sievade6C::class, 'create'])->name('Sievademn.create')->middleware('auth');
+Route::post('/Sievademn/save', [Sievade6C::class, 'save'])->name('Sievademn.save')->middleware('auth');
+Route::post('/Sievademn/table', [Sievade6C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievademn/edit/{id}', [Sievade6C::class, 'edit'])->name('Sievademn.edit')->middleware('auth');
+Route::delete('/Sievademn/delete/{id}', [Sievade6C::class, 'destroy']); //ruta de tu web.php
+
+//  SISTEMA DE EVALUACION  -   Catalogo Valor de Indicador      *****    JHR    10-03-25 *****
+Route::get('/Sievadevalor/list', [Sievade7C::class,  'list'])->name('Sievadevalor.list')->middleware('auth');
+Route::get('/Sievadevalor/create', [Sievade7C::class, 'create'])->name('Sievadevalor.create')->middleware('auth');
+Route::post('/Sievadevalor/save', [Sievade7C::class, 'save'])->name('Sievadevalor.save')->middleware('auth');
+Route::post('/Sievadevalor/table', [Sievade7C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadevalor/edit/{id}', [Sievade7C::class, 'edit'])->name('Sievadevalor.edit')->middleware('auth');
+Route::delete('/Sievadevalor/delete/{id}', [Sievade7C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Indicador      *****    JHR    10-03-25 *****
+Route::get('/Sievadeindicador/list', [Sievade8C::class,  'list'])->name('Sievadeindicador.list')->middleware('auth');
+Route::get('/Sievadeindicador/create', [Sievade8C::class, 'create'])->name('Sievadeindicador.create')->middleware('auth');
+Route::post('/Sievadeindicador/save', [Sievade8C::class, 'save'])->name('Sievadeindicador.save')->middleware('auth');
+Route::post('/Sievadeindicador/table', [Sievade8C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeindicador/edit/{id}', [Sievade8C::class, 'edit'])->name('Sievadeindicador.edit')->middleware('auth');
+Route::delete('/Sievadeindicador/delete/{id}', [Sievade8C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo tipo de meta individual      *****    JHR    10-03-25 *****
+Route::get('/Sievademeta/list', [Sievade9C::class,  'list'])->name('Sievademeta.list')->middleware('auth');
+Route::get('/Sievademeta/create', [Sievade9C::class, 'create'])->name('Sievademeta.create')->middleware('auth');
+Route::post('/Sievademeta/save', [Sievade9C::class, 'save'])->name('Sievademeta.save')->middleware('auth');
+Route::post('/Sievademeta/table', [Sievade9C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievademeta/edit/{id}', [Sievade9C::class, 'edit'])->name('Sievademeta.edit')->middleware('auth');
+Route::delete('/Sievademeta/delete/{id}', [Sievade9C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo Tipo de Unidad de Medida             *****    JHR    10-03-25 *****
+Route::get('/Sievadeunidad/list', [Sievade10C::class,  'list'])->name('Sievadeunidad.list')->middleware('auth');
+Route::get('/Sievadeunidad/create', [Sievade10C::class, 'create'])->name('Sievadeunidad.create')->middleware('auth');
+Route::post('/Sievadeunidad/save', [Sievade10C::class, 'save'])->name('Sievadeunidad.save')->middleware('auth');
+Route::post('/Sievadeunidad/table', [Sievade10C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeunidad/edit/{id}', [Sievade10C::class, 'edit'])->name('Sievadeunidad.edit')->middleware('auth');
+Route::delete('/Sievadeunidad/delete/{id}', [Sievade10C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo  Valor del parametro alcanzado      *****    JHR    10-03-25 *****
+Route::get('/Sievadeparametro/list', [Sievade11C::class,  'list'])->name('Sievadeparametro.list')->middleware('auth');
+Route::get('/Sievadeparametro/create', [Sievade11C::class, 'create'])->name('Sievadeparametro.create')->middleware('auth');
+Route::post('/Sievadeparametro/save', [Sievade11C::class, 'save'])->name('Sievadeparametro.save')->middleware('auth');
+Route::post('/Sievadeparametro/table', [Sievade11C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeparametro/edit/{id}', [Sievade11C::class, 'edit'])->name('Sievadeparametro.edit')->middleware('auth');
+Route::delete('/Sievadeparametro/delete/{id}', [Sievade11C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo  Accion correctiva        *****    JHR    10-03-25 *****
+Route::get('/Sievadeaccion/list', [Sievade12C::class,  'list'])->name('Sievadeaccion.list')->middleware('auth');
+Route::get('/Sievadeaccion/create', [Sievade12C::class, 'create'])->name('Sievadeaccion.create')->middleware('auth');
+Route::post('/Sievadeaccion/save', [Sievade12C::class, 'save'])->name('Sievadeaccion.save')->middleware('auth');
+Route::post('/Sievadeaccion/table', [Sievade12C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeaccion/edit/{id}', [Sievade12C::class, 'edit'])->name('Sievadeaccion.edit')->middleware('auth');
+Route::delete('/Sievadeaccion/delete/{id}', [Sievade12C::class, 'destroy']); //ruta de tu web.php
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo  Comportamiento asociado       *****    JHR    10-03-25 *****
+Route::get('/Sievadeasociado/list', [Sievade13C::class,  'list'])->name('Sievadeasociado.list')->middleware('auth');
+Route::get('/Sievadeasociado/create', [Sievade13C::class, 'create'])->name('Sievadeasociado.create')->middleware('auth');
+Route::post('/Sievadeasociado/save', [Sievade13C::class, 'save'])->name('Sievadeasociado.save')->middleware('auth');
+Route::post('/Sievadeasociado/table', [Sievade13C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadeasociado/edit/{id}', [Sievade13C::class, 'edit'])->name('Sievadeasociado.edit')->middleware('auth');
+Route::delete('/Sievadeasociado/delete/{id}', [Sievade13C::class, 'destroy']); //ruta de tu web.php
+
+
+
+//  SISTEMA DE EVALUACION  -   Catalogo tipo de meta individual      *****    JHR    10-03-25 *****
+Route::get('/Sievadealineacion/list', [Sievade14C::class,  'list'])->name('Sievadealineacion.list')->middleware('auth');
+Route::get('/Sievadealineacion/create', [Sievade14C::class, 'create'])->name('Sievadealineacion.create')->middleware('auth');
+Route::post('/Sievadealineacion/save', [Sievade14C::class, 'save'])->name('Sievadealineacion.save')->middleware('auth');
+Route::post('/Sievadealineacion/table', [Sievade14C::class, 'searchTable']);
+Route::match(['get', 'post'], '/Sievadealineacion/edit/{id}', [Sievade14C::class, 'edit'])->name('Sievadealineacion.edit')->middleware('auth');
+Route::delete('/Sievadealineacion/delete/{id}', [Sievade14C::class, 'destroy']); //ruta de tu web.php
+
+
+
+
 
 //ROUTE_LETTER
 Route::get('/letter/list', LetterC::class)->name('letter.list')->middleware('auth');
@@ -311,6 +467,7 @@ Route::post('/office/cloud/oficios', [CloudC::class, 'cloudOficios'])->name('off
 Route::post('/office/cloud/upload', [CloudC::class, 'upload'])->name('office.cloud.upload')->middleware('auth');
 Route::post('/office/cloud/delete', [CloudC::class, 'delete'])->name('office.cloud.delete')->middleware('auth');
 Route::get('/office/generate-pdf/{id}', [ReporteTemplateC::class, 'office'])->middleware('auth');
+
 //ROUTE_COUSER ---- >Alfresco
 Route::get('/alfresco/upload', [AlfrescoC::class, 'showUploadForm'])->name('alfresco.upload.form');// Ruta para mostrar el formulario de carga de archivo
 Route::post('/upload-file', [AlfrescoC::class, 'uploadFile'])->name('alfresco.upload.file');// Ruta para manejar la carga de archivo

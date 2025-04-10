@@ -15,7 +15,7 @@ class Courses10C extends Controller
     {
         // Obtener todos los cursos de coordinación
         $coursestipocur = CoursestipocurM::all();
-    
+
         // Pasar los cursos a la vista
         return view('courses/coursestipocur/list', compact('coursestipocur'));
     }
@@ -48,7 +48,7 @@ class Courses10C extends Controller
         $item = new CoursestipocurM();
         $item->id_cat_tipo_cursos = '';  // Valor por defecto
         $item->descripcion = '';    // Valor por defecto
-        $item->estatus = '';     
+        $item->estatus = '';
 
         return view('courses.coursestipocur.form', compact('item'));
     }
@@ -56,28 +56,28 @@ class Courses10C extends Controller
     {
         $searchValue = $request->get('searchValue');  // Término de búsqueda
         $iterator = $request->get('iterator', 0);  // Si no se pasa iterador, por defecto será 0 (primera página)
-    
+
         // Filtrar los cursos que coincidan con la búsqueda
         $courses = CoursestipocurM::where('descripcion', 'like', '%' . $searchValue . '%')
                            ->offset($iterator)
                            ->limit(5)  // Límite de resultados por página
                            ->get();
-    
+
         return response()->json([
             'value' => $courses
         ]);
     }
     public function destroy($id)
-    {   
+    {
            try {
             $course = CoursestipocurM::findOrFail($id);
                 $course->delete();
-                return response()->json(['success' => true, 'message' => 'Eliminado exitosamente.']); 
+                return response()->json(['success' => true, 'message' => 'Eliminado exitosamente.']);
             } catch (\Exception $e) {
                 return response()->json(['error' => 'Error al eliminar el curso'], 500);
-                
+
             }
-            
+
     }
     public function edit(Request $request, $id)
     {

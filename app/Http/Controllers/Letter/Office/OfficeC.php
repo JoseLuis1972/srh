@@ -192,7 +192,7 @@ class OfficeC extends Controller
 
             return $messagesC->messageSuccessRedirect('office.list', 'Elemento agregado con éxito.');
 
-        } else { //modificar elemento 
+        } else { //modificar elemento
             //Array
             $data = [
                 'fecha_inicio' => $request->fecha_inicio,

@@ -22,7 +22,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\MessagesC;
 use Carbon\Carbon;
 
-
 class LetterC extends Controller
 {
     public function __invoke()
@@ -65,14 +64,14 @@ class LetterC extends Controller
         $selectArea = $collectionAreaM->list(); //Catalogo de area
         $selectAreaEdit = []; //catalogo de area null
 
-        $selectUser = []; //Catalogo de Area - usuario, al crear comienza en vacio 
-        $selectUserEdit = []; //Catalogo de Area - usuario, al crear comienza en vacio 
+        $selectUser = []; //Catalogo de Area - usuario, al crear comienza en vacio
+        $selectUserEdit = []; //Catalogo de Area - usuario, al crear comienza en vacio
 
-        $selectEnlace = []; //Catalogo de Area - enlace, al crear comienza en vacio 
-        $selectEnlaceEdit = []; //Catalogo de Area - enlace, al crear comienza en vacio 
+        $selectEnlace = []; //Catalogo de Area - enlace, al crear comienza en vacio
+        $selectEnlaceEdit = []; //Catalogo de Area - enlace, al crear comienza en vacio
 
         $selectUnidad = [];//Catalogo de unidad
-        $selectUnidadEdit = []; //Catalogo de Unidad, al crear comienza en vacio 
+        $selectUnidadEdit = []; //Catalogo de Unidad, al crear comienza en vacio
 
         $selectCoordinacion = []; //Catalogos de coordinacion vacios
         $selectCoordinacionEdit = [];//Catalogos de coordinacion vacios
@@ -246,7 +245,7 @@ class LetterC extends Controller
 
         if (!isset($request->id_tbl_correspondencia)) { // || empty($request->id_tbl_correspondencia)) { // Creación de nuevo nuevo elemento
             //Agregar elementos
-            
+
             /// Validación de no de  turno de sistema
             if ($this->getMaxTurno($request->num_turno_sistema) <= $letterM->getMaxNuSistem()) {
                 $numTurnoSistemaAux = $this->procesarParametros($request->num_turno_sistema, $collectionConsecutivoM->noDocumento($request->id_cat_anio, config('custom_config.CP_TABLE_CORRESPONDENCIA')));
@@ -302,7 +301,7 @@ class LetterC extends Controller
 
             return $messagesC->messageSuccessRedirect('letter.list', 'Elemento agregado con éxito.');
 
-        } else { //modificar elemento 
+        } else { //modificar elemento
 
             if (in_array($ADM_TOTAL, $roleUserArray) || in_array($COR_TOTAL, $roleUserArray)) {
 
@@ -382,7 +381,7 @@ class LetterC extends Controller
     {
         $letterM = new LetterM();
         $result = $letterM->uniqueNoDocument($request->id, $request->value, $request->attribute);
-        $value = !$result ? false : true; // Validacion de valor 
+        $value = !$result ? false : true; // Validacion de valor
 
         // Responder con los resultados
         return response()->json([
@@ -395,7 +394,7 @@ class LetterC extends Controller
     {
         $collectionRemitenteM = new CollectionRemitenteM();
         $result = $collectionRemitenteM->uniqueRemitente($request->value, $request->attribute);
-        $value = !$result ? false : true; // Validacion de valor 
+        $value = !$result ? false : true; // Validacion de valor
 
         // Responder con los resultados
         return response()->json([

@@ -7,7 +7,7 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Sistema Integral para Recursos Humanos</h3>
+                            <h3 class="font-weight-bold">Sistema Integral para Recursos Humanos  jhr</h3>
                             <h5 class="font-weight-normal mb-0">Usuarios</h5>
                         </div>
                     </div>
@@ -210,39 +210,39 @@
 
                             /*
                                                         document.addEventListener("DOMContentLoaded", function () {
-                            
-                            
-                            
+
+
+
                                                             // Asegurarse de que los elementos estén cargados
-                            
-                            
+
+
                                                             // Verificar si los elementos existen antes de asignarles eventos
                                                             if (modal && btn && span && closeModal) {
                                                                 // Función para ocultar el modal
                                                                 function hiddenModal() {
                                                                     modal.style.display = "none";
                                                                 }
-                            
+
                                                                 // Función para mostrar el modal
                                                                 function showModal() {
                                                                     modal.style.display = "block";
                                                                 }
-                            
+
                                                                 // Abrir el modal cuando el usuario haga clic en el botón
                                                                 btn.onclick = function () {
                                                                     showModal();
                                                                 }
-                            
+
                                                                 // Cerrar el modal cuando el usuario haga clic en el botón de cierre (span)
                                                                 span.onclick = function () {
                                                                     hiddenModal();
                                                                 }
-                            
+
                                                                 // Cerrar el modal cuando el usuario haga clic en el botón de "Cancelar"
                                                                 closeModal.onclick = function () {
                                                                     hiddenModal();
                                                                 }
-                            
+
                                                                 // Cerrar el modal si el usuario hace clic fuera del contenido del modal
                                                                 window.onclick = function (event) {
                                                                     if (event.target == modal) {

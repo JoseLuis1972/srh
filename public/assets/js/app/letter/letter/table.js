@@ -1,7 +1,7 @@
 var iterator = 1; // Se comienza el iterador en 1
 var emptyContent = false;
 
-$(document).ready(function () {
+$(document).ready(function() {
     searchInit();
     setValue();
 });
@@ -10,17 +10,17 @@ function searchInit() {
     const searchValue = document.getElementById('searchValue').value;
     const iteradorAux = (iterator * 5) - 5;
 
-    $.get(URL_DEFAULT.concat('/letter/table'), {
+    $.get(URL_DEFAULT.concat('/Tablemetasdinamicas/table'), {
         iterator: iteradorAux,
         searchValue: searchValue
-    }, function (response) {
+    }, function(response) {
 
 
         const tbody = $('#template-table tbody');
         tbody.empty(); // Limpiar la tabla
 
         if (response.value && response.value.length > 0) {
-            response.value.forEach(function (object) {
+            response.value.forEach(function(object) {
                 const finalUrl = URL_DEFAULT.concat(`/letter/edit/${object.id}`);
                 const finalCloud = URL_DEFAULT.concat(`/letter/cloud/${object.id}`);
                 const urlReport = URL_DEFAULT.concat(`/letter/generate-pdf/correspondencia/${object.id}`);
@@ -140,7 +140,7 @@ function paginatorMin1() {
     searchInit();
 }
 
-// se establan los valores de los lavel 
+// se establan los valores de los lavel
 function setValue() {
 
     let iteratorAux = iterator;
