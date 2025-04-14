@@ -47,8 +47,6 @@
                                     <th>Tipo de Meta</th>
                                     <th>Ins de Gestion</th>
                                     <th>Desc. Objetivo</th>
-                                    <th>Unidad de Medida</th>
-                                    <th>Porcentaje Asignado</th>
                                     <th>Estatus</th>
                                 </tr>
                             </thead>

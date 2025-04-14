@@ -92,8 +92,6 @@ function searchInit() {
                             <td>${object.Tipo_Meta}</td>
                             <td>${object.DescripcionInstrumento}</td>               <!-- ASievadeinstrumentoM    -   descripcion   -->
                             <td>${object.desc_um_medicina}</td>
-                            <td>${object.DescripcionUnidad}</td>                 <!-- SievadeunidadM          -   descripcion   -->
-                            <td>${object.peso_ind}</td>
                             <td>${object.estatus ? 'ACTIVO' : 'INACTIVO'}</td>
                         </tr>
                     `;
@@ -146,13 +144,11 @@ function renderTable(response) {
                         </div>
                     </td>
 
-                    <td>${object.DescripcionAlineacion}</td>                   <!-- asignar el numero de meta por trabajador 1 - 7   -->
-                    <td>${object.alineacion_pnd}</td>
+                    <td>${object.id_metas_ind}</td>                   <!-- asignar el numero de meta por trabajador 1 - 7   -->
+                    <td>${object.DescripcionAlineacion}</td>
                     <td>${object.Tipo_Meta}</td>
                     <td>${object.DescripcionInstrumento}</td>               <!-- ASievadeinstrumentoM    -   descripcion   -->
                     <td>${object.desc_um_medicina}</td>
-                    <td>${object.DescripcionUnidad}</td>                 <!-- SievadeunidadM          -   descripcion   -->
-                    <td>${object.peso_ind}</td>
                     <td>${object.estatus ? 'ACTIVO' : 'INACTIVO'}</td>
 
 

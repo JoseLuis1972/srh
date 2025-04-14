@@ -41,19 +41,16 @@ class TablemetasdinamicasC extends Controller
         $item = new TablemetasdinamicasM();
         // $item->alineacion_pnd = '';
 
-       $item->desc_um_medicina = '';
-	   $item->obj_contribucion = '';
-	   $item->satisfactorio = '';
-	   $item->no_satisfactorio  = '';
-	   $item->no_aprobatorio = '';
-	   $item->peso_ind = '';
-	   $item->dependencia = '';
-	   $item->ur = '';
-	   $item->estatus = '';
-	   $item->area_responsable = '';
-       $item->ponderacion = '';
-       $item->unidad_medica = '';
-       $item->calificacion = '';
+     //  $item->desc_um_medicina = '';
+	 //  $item->obj_contribucion = '';
+	 //  $item->satisfactorio = '';
+	 //  $item->no_satisfactorio  = '';
+	 //  $item->no_aprobatorio = '';
+	//   $item->peso_ind = '';
+	//   $item->estatus = '';
+     //  $item->ponderacion = '';
+     //  $item->unidad_medica = '';
+    //   $item->calificacion = '';
 
         // ------    Valor por Catalogos    ----------
         $item = new TablemetasdinamicasM();
@@ -108,10 +105,7 @@ class TablemetasdinamicasC extends Controller
                 'no_satisfactorio' => 'required|string|max:200',
                 'no_aprobatorio' => 'required|string|max:200',
                 'peso_ind' => 'required|string|max:200',
-                'dependencia' => 'required|string|max:200',
-                'ur' => 'required|string|max:200',
                 'estatus' => 'required|string|max:200',
-                'area_responsable' => 'required|string|max:200',
                 'ponderacion' => 'required|string|max:200',
                 'unidad_medica' => 'required|string|max:200',
                 'calificacion ' => 'required|string|max:200',
@@ -138,10 +132,7 @@ class TablemetasdinamicasC extends Controller
            $sievade->no_satisfactorio = $request->input('no_satisfactorio');
            $sievade->no_aprobatorio = $request->input('no_aprobatorio');
            $sievade->peso_ind = $request->input('peso_ind');
-           $sievade->dependencia = $request->input('dependencia');
-           $sievade->ur = $request->input('ur');
-           $sievade->estaus = $request->input('estatus');
-           $sievade->area_responsable = $request->input('area_responsable');
+           $sievade->estatus = $request->input('estatus') ? true : false;
            $sievade->ponderacion = $request->input('ponderacion');
            $sievade->unidad_medica = $request->input('unidad_medica');
            $sievade->calificacion = $request->input('calificacion');
@@ -185,25 +176,22 @@ public function save(Request $request)
             $nuevoCurso = $TablemetasdinamicasM::create([
 
                  'id_usuarios' => Auth::user()->id,    // DATA_SYSTEM
-
-                 'id_meta_individual' => $request->id_meta_individual,
-	             'id_int_gest_rend' => $request->id_int_gest_rend,
-	             'id_verbo' => $request->id_verbo,
+                 'id_alineacion_pnd' => strtoupper($request->id_alineacion_pnd),
+                 'id_meta_individual' => strtoupper($request->id_meta_individual),
+	             'id_int_gest_rend' => strtoupper($request->id_int_gest_rend),
+	             'id_verbo' => strtoupper($request->id_verbo),
 	             'desc_um_medicina' => strtoupper($request->desc_um_medicina),
 	             'obj_contribucion' => strtoupper($request->obj_contribucion),
 	             'satisfactorio' => strtoupper($request->satisfactorio),
-                 'no_satisfactorio' => strtoupper($request->satisfactorio),
+                 'no_satisfactorio' => strtoupper($request->no_satisfactorio),
 	             'no_aprobatorio' => strtoupper($request->no_aprobatorio),
-	             'id_tipo_unidad' => $request->id_tipo_unidad,
+	             'id_tipo_unidad' => strtoupper($request->id_tipo_unidad),
 	             'peso_ind' => strtoupper($request->peso_ind),
-	             'dependencia' => strtoupper($request->dependencia),
-	             'ur' => strtoupper($request->ur),
-	             'estatus' => strtoupper($request->estaus),
-	             'area_responsable' => strtoupper($request->area_responsable),
-                 'id_alineacion_pnd ' => strtoupper($request->id_alineacion_pnd ),
+                 'estatus' => strtoupper($request->estatus) ?? false,
+                 'id_val_parametro' => strtoupper($request->id_val_parametro),
                  'ponderacion' => strtoupper($request->ponderacion),
                  'unidad_medica' => strtoupper($request->unidad_medica),
-                 'calificacion ' => strtoupper($request->calificacion ),
+                 'calificacion' => strtoupper($request->calificacion),
                  'id_usuario_sistema' => Auth::user()->id,
                  'fecha_usuario' => $now,
 
@@ -214,24 +202,22 @@ public function save(Request $request)
 
                 //'id_metas_ind' => $request->id_metas_ind,
                  'id_usuarios' => Auth::user()->id,    // DATA_SYSTEM
-                 'id_meta_individual' => $request->id_meta_individual,
-	             'id_int_gest_rend' => $request->id_int_gest_rend,
-	             'id_verbo' => $request->id_verbo,
+                 'id_alineacion_pnd' => strtoupper($request->id_alineacion_pnd),
+                 'id_meta_individual' => strtoupper($request->id_meta_individual),
+	             'id_int_gest_rend' => strtoupper($request->id_int_gest_rend),
+	             'id_verbo' => strtoupper($request->id_verbo),
 	             'desc_um_medicina' => strtoupper($request->desc_um_medicina),
 	             'obj_contribucion' => strtoupper($request->obj_contribucion),
 	             'satisfactorio' => strtoupper($request->satisfactorio),
                  'no_satisfactorio' => strtoupper($request->satisfactorio),
 	             'no_aprobatorio' => strtoupper($request->no_aprobatorio),
-	             'id_tipo_unidad' => $request->id_tipo_unidad,
+	             'id_tipo_unidad' => strtoupper($request->id_tipo_unidad),
 	             'peso_ind' => strtoupper($request->peso_ind),
-	             'dependencia' => strtoupper($request->dependencia),
-	             'ur' => strtoupper($request->ur),
-	             'estatus' => strtoupper($request->estaus),
-	             'area_responsable' => strtoupper($request->area_responsable),
-                 'id_alineacion_pnd ' => strtoupper($request->id_alineacion_pnd ),
+	             'estatus' => strtoupper($request->estatus) ?? false,
+	             'id_val_parametro' => strtoupper($request->id_val_parametro),
                  'ponderacion' => strtoupper($request->ponderacion),
                  'unidad_medica' => strtoupper($request->unidad_medica),
-                 'calificacion ' => strtoupper($request->calificacion ),
+                 'calificacion' => strtoupper($request->calificacion),
                  'id_usuario_sistema' => Auth::user()->id,
                  'fecha_usuario' => $now,
             ];
@@ -316,22 +302,13 @@ public function save(Request $request)
                            ->limit(5)  // Límite de resultados por página
                            ->get();
 
-        $sievades = TablemetasdinamicasM::where('dependencia', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = TablemetasdinamicasM::where('ur', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
 
         $sievades = TablemetasdinamicasM::where('estatus', 'like', '%' . $searchValue . '%')
                            ->offset($iterator)
                            ->limit(5)  // Límite de resultados por página
                            ->get();
 
-        $sievades = TablemetasdinamicasM::where('area_responsable', 'like', '%' . $searchValue . '%')
+        $sievades = SievadeparametroM::where('id_val_parametro', 'like', '%' . $searchValue . '%')
                            ->offset($iterator)
                            ->limit(5)  // Límite de resultados por página
                            ->get();
