@@ -43,10 +43,12 @@
                                 <tr>
                                     <th>Menu</th>
                                     <th># Meta</th>
-                                    <th>Aliniacion PND</th>
                                     <th>Tipo de Meta</th>
-                                    <th>Ins de Gestion</th>
+                                    <th>Inst. de Gestion</th>
                                     <th>Desc. Objetivo</th>
+                                    <th>Unidad de Medida </th>
+                                    <th>Porcentaje Asignado</th>
+                                    <th>calificacion</th>
                                     <th>Estatus</th>
                                 </tr>
                             </thead>

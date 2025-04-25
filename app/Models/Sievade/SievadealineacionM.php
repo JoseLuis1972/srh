@@ -37,7 +37,7 @@ class SievadealineacionM extends Model
     $query = DB::table('sievade.cat_alineacion_pnd')
         ->select([
             'sievade.cat_alineacion_pnd.id_alineacion_pnd AS id',
-            DB::raw('UPPER(sievade.cat_alineacion_pnd.descripcion) AS DescripcionAlineacion'),
+            DB::raw('UPPER(sievade.cat_alineacion_pnd.descripcion) AS DescripcionAlin'),
             DB::raw('CASE WHEN sievade.cat_alineacion_pnd.estatus = 1 THEN TRUE ELSE FALSE END AS estatus'),
         ]);
 

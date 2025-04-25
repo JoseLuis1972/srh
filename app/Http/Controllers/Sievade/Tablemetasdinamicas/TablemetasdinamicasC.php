@@ -28,9 +28,12 @@ use Carbon\Carbon;
 class TablemetasdinamicasC extends Controller
 {
 
+
     // Retorna la vista para correspondencia
     public function list()
       {
+       Log::info('TablemetasdinamicasC  - Funcion list');     // JHR COMENTARIO
+
         return view('Sievade.Tablemetasdinamicas.list');
       }
 
@@ -38,21 +41,9 @@ class TablemetasdinamicasC extends Controller
 
     public function create()
       {
-        $item = new TablemetasdinamicasM();
-        // $item->alineacion_pnd = '';
+        Log::info('TablemetasdinamicasC  - Funcion create');     // JHR COMENTARIO
 
-     //  $item->desc_um_medicina = '';
-	 //  $item->obj_contribucion = '';
-	 //  $item->satisfactorio = '';
-	 //  $item->no_satisfactorio  = '';
-	 //  $item->no_aprobatorio = '';
-	//   $item->peso_ind = '';
-	//   $item->estatus = '';
-     //  $item->ponderacion = '';
-     //  $item->unidad_medica = '';
-    //   $item->calificacion = '';
-
-        // ------    Valor por Catalogos    ----------
+         // ------    Valor por Catalogos    ----------
         $item = new TablemetasdinamicasM();
         $TablemetasdinamicasM = new TablemetasdinamicasM();                             //id_metas_ind             TablemetasdinamicasM
         $SievademetaM = new SievademetaM();                                             //id_meta_individual       SievademetaM
@@ -91,9 +82,13 @@ class TablemetasdinamicasC extends Controller
     }
 
 
-   //public function edit(Request $request, $id)
-   public function edit($id)
+ //  public function edit(string $id)                      ********* JHR
+
+   public function edit(Request $request, $id)
+
     {
+         Log::info('TablemetasdinamicasC  - Funcion edit');     // JHR COMENTARIO
+
         $sievade = TablemetasdinamicasM ::find($id);
         $messagesC = new MessagesC();
         if ($request->isMethod('post')) {
@@ -112,10 +107,7 @@ class TablemetasdinamicasC extends Controller
 
             ]);
 
-
-
            // ------     Class
-
            $item = new TablemetasdinamicasM();
            $TablemetasdinamicasM = new TablemetasdinamicasM();                             //id_metas_ind             TablemetasdinamicasM
            $SievademetaM = new SievademetaM();                                             //id_meta_individual       SievademetaM
@@ -144,7 +136,7 @@ class TablemetasdinamicasC extends Controller
            $selectMetaIEdit = isset($item->id_meta_individual) ? $SievademetaM->edit($item->id_meta_individual) : [];
 
            $selectinstrumento = $SievadeinstrumentoM->listorganizacion();
-           $selectinstrumentoEdit = isset($item->id_int_gest_rend) ? $SSievadeinstrumentoM->edit($item->id_int_gest_rend) : [];
+           $selectinstrumentoEdit = isset($item->id_int_gest_rend) ? $SievadeinstrumentoM->edit($item->id_int_gest_rend) : [];
 
            $selectverbo = $SievadeverboM->listorganizacion();
            $selectverboEdit = isset($item->id_verbo) ? $SievadeverboM->edit($item->id_verbo) : [];
@@ -159,7 +151,7 @@ class TablemetasdinamicasC extends Controller
            $selecalineacionEdit = isset($item->id_alineacion_pnd) ? $SievadealineacionM->edit($item->id_alineacion_pnd) : [];
         }
 
-        return view('Sievade.Tablemetasdinamicas.edit', compact('item','selectMetaI','selectMetaIEdit', 'selectinstrumento','selectinstrumentoEdit',
+         return view('Sievade.Tablemetasdinamicas.form', compact('item','selectMetaI','selectMetaIEdit', 'selectinstrumento','selectinstrumentoEdit',
                     'selectverbo','selectverboEdit','selecunidad', 'selecunidadEdit','selecparametro', 'selecparametroEdit','selecalineacion', 'selecalineacionEdit'));
     }
 
@@ -167,6 +159,8 @@ class TablemetasdinamicasC extends Controller
 
 public function save(Request $request)
     {
+       Log::info('TablemetasdinamicasC  - Funcion Save');     // JHR COMENTARIO
+
        $TablemetasdinamicasM = new TablemetasdinamicasM();
        $messagesC = new MessagesC();
        $now = Carbon::now(); // Usando Carbon para la fecha actual
@@ -187,7 +181,8 @@ public function save(Request $request)
 	             'no_aprobatorio' => strtoupper($request->no_aprobatorio),
 	             'id_tipo_unidad' => strtoupper($request->id_tipo_unidad),
 	             'peso_ind' => strtoupper($request->peso_ind),
-                 'estatus' => strtoupper($request->estatus) ?? false,
+             //    'estatus' => strtoupper($request->estatus) ?? false,
+                 'estatus' => $request->has('estatus') ? true : false,
                  'id_val_parametro' => strtoupper($request->id_val_parametro),
                  'ponderacion' => strtoupper($request->ponderacion),
                  'unidad_medica' => strtoupper($request->unidad_medica),
@@ -209,11 +204,12 @@ public function save(Request $request)
 	             'desc_um_medicina' => strtoupper($request->desc_um_medicina),
 	             'obj_contribucion' => strtoupper($request->obj_contribucion),
 	             'satisfactorio' => strtoupper($request->satisfactorio),
-                 'no_satisfactorio' => strtoupper($request->satisfactorio),
+                 'no_satisfactorio' => strtoupper($request->no_satisfactorio),
 	             'no_aprobatorio' => strtoupper($request->no_aprobatorio),
 	             'id_tipo_unidad' => strtoupper($request->id_tipo_unidad),
 	             'peso_ind' => strtoupper($request->peso_ind),
-	             'estatus' => strtoupper($request->estatus) ?? false,
+	          //   'estatus' => strtoupper($request->estatus) ?? false,
+                 'estatus' => $request->has('estatus') ? true : false,
 	             'id_val_parametro' => strtoupper($request->id_val_parametro),
                  'ponderacion' => strtoupper($request->ponderacion),
                  'unidad_medica' => strtoupper($request->unidad_medica),
@@ -230,112 +226,79 @@ public function save(Request $request)
     }
 
 
-
-    public function searchTable(Request $request)
+ public function searchTable(Request $request)
     {
-        $searchValue = $request->get('searchValue');  // Término de búsqueda
-        $iterator = $request->get('iterator', 0);  // Si no se pasa iterador, por defecto será 0 (primera página)
+        Log::info('TablemetasdinamicasM - Función searchTable ');
+        try {
+            $iterator = $request->input('iterator', 1); // Página actual con valor por defecto
+            $searchValue = $request->input('searchValue', ''); // Valor de búsqueda con valor por defecto
 
-        // Filtrar los cursos que coincidan con la búsqueda
+            Log::info('TablemetasdinamicasC - Función searchTable 1:');
+            Log::info('TVALOR DE LA VARIABLE $iterator:');
+            Log::info($iterator);
+            Log::info('TVALOR DE LA VARIABLE $searchValue:');
+            Log::info($searchValue);
+            Log::info('TVALOR DE LA VARIABLE $metasDin:');
+            Log::info($metasDin);
 
-        //$sievades = SievadeverboM::where('id_usuarios', 'like', '%' . $searchValue . '%');
-        //$sievades = TablemetasdinamicasM::where('id_metas_ind', 'like', '%' . $searchValue . '%');           //id_metas_ind           TablemetasdinamicasM
+            // Obtener resultados
+            $TablemetasdinamicasM = new TablemetasdinamicasM();
 
-        $sievades = SievademetaM::where('descripcion', 'like', '%' . $searchValue . '%')                       //id_meta_individual     SievademetaM
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-        $sievades = SievadeinstrumentoM::where('descripcion', 'like', '%' . $searchValue . '%')                //id_int_gest_rend       SievadeinstrumentoM
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
+            Log::info('TablemetasdinamicasC - Función searchTable 2');
+            Log::info('TVALOR DE LA VARIABLE $iterator:');
+            Log::info($iterator);
+            Log::info('TVALOR DE LA VARIABLE $searchValue:');
+            Log::info($searchValue);
+            Log::info('TVALOR DE LA VARIABLE $metasDin:');
+            Log::info($metasDin);
 
-        $sievades = SievadeverboM::where('descripcion', 'like', '%' . $searchValue . '%')                      //id_verbo               SievadeverboM
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = SievadeunidadM::where('descripcion', 'like', '%' . $searchValue . '%')                      //id_tipo_unidad        SievadeunidadM
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = SievadeparametroM::where('descripcion', 'like', '%' . $searchValue . '%')                    //id_val_parametro     SievadeparametroM
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = SievadealineacionM::where('descripcion', 'like', '%' . $searchValue . '%')                  //id_alineacion_pnd      SievadealineacionM
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-//    CAMPOS  ****************************************
-
-        $sievades = TablemetasdinamicasM::where('desc_um_medicina', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = TablemetasdinamicasM::where('obj_contribucion', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = TablemetasdinamicasM::where('satisfactorio', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = TablemetasdinamicasM::where('no_satisfactorio', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = TablemetasdinamicasM::where('no_aprobatorio', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-        $sievades = TablemetasdinamicasM::where('peso_ind', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
+            $metasDin = $TablemetasdinamicasM->list($iterator, $searchValue);
 
 
-        $sievades = TablemetasdinamicasM::where('estatus', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
+            Log::info('TablemetasdinamicasC - Función searchTable 3:');
+            Log::info('TVALOR DE LA VARIABLE $iterator:');
+            Log::info($iterator);
+            Log::info('TVALOR DE LA VARIABLE $searchValue:');
+            Log::info($searchValue);
+            Log::info('TVALOR DE LA VARIABLE $metasDin:');
+            Log::info($metasDin);
 
-        $sievades = SievadeparametroM::where('id_val_parametro', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
+            // Obtener resultados
+            return response()->json([
+                'status' => true,
+                'message' => 'Resultados obtenidos correctamente',
+                'data' => $metasDin->items(), // Obtiene los elementos de la paginación
+                'pagination' => [
+                    'current_page' => $metasDin->currentPage(),
+                    'last_page' => $metasDin->lastPage(),
+                    'per_page' => $metasDin->perPage(),
+                    'total' => $metasDin->total(),
+                ],
+            ], 200);
 
-       $sievades = TablemetasdinamicasM::where('ponderacion', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-       $sievades = TablemetasdinamicasM::where('unidad_medica', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
-
-       $sievades = TablemetasdinamicasM::where('calificacion', 'like', '%' . $searchValue . '%')
-                           ->offset($iterator)
-                           ->limit(5)  // Límite de resultados por página
-                           ->get();
+            Log::info('TablemetasdinamicasC - Función searchTable 4:');
+            Log::info('TVALOR DE LA VARIABLE $iterator:');
+            Log::info($iterator);
+            Log::info('TVALOR DE LA VARIABLE $searchValue:');
+            Log::info($searchValue);
+            Log::info('TVALOR DE LA VARIABLE $metasDin:');
+            Log::info($metasDin);
 
 
-        return response()->json([
-            'value' => $sievades
-        ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error al procesar la solicitud',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+
 
     public function destroy($id)
     {
+        Log::info('TablemetasdinamicasC  - Funcion destroy');     // JHR COMENTARIO
+
            try {
             $sievade = TablemetasdinamicasM::findOrFail($id);
                 $sievade->delete();
@@ -346,7 +309,6 @@ public function save(Request $request)
             }
 
     }
-
 
 }
 
